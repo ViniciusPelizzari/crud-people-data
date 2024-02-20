@@ -26,7 +26,7 @@ public class PeopleService {
     }
 
     @Transactional
-    public void deletePeopleCPF(String cpfId) {
+    public void deletePeopleByCpfId(String cpfId) {
         peopleRepository.deleteById(cpfId);
     }
 
@@ -42,6 +42,7 @@ public class PeopleService {
         people.setEmailPeople(peopleEntity.getEmailPeople());
         people.setObservationPeople(peopleEntity.getObservationPeople());
         people.setAddressEntityPeople(peopleEntity.getAddressEntityPeople());
+
         return peopleRepository.save(people);
     }
 
@@ -59,5 +60,10 @@ public class PeopleService {
 
     public List<PeopleEntity> findPeopleByLastName(String lastNamePeople){
         return peopleRepository.findPeopleByLastName(lastNamePeople);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PeopleEntity> findAllActivePeople() {
+        return peopleRepository.findByStatusPeople(true);
     }
 }

@@ -44,7 +44,8 @@ public class PeopleEntity {
     private AddressEntity addressEntityPeople;
 
     public void setCpfPeople(String cpf) {
-        if (CPFValidator.validarCPF(cpf)) { // Usar o CustomCPFValidator
+        cpf = cpf.replaceAll("[^0-9]", "");
+        if (CPFValidator.validarCPF(cpf)) {
             this.cpfPeople = cpf;
         } else {
             throw new IllegalArgumentException("CPF inválido");

@@ -30,14 +30,14 @@ public class PeopleController {
     }
 
     @DeleteMapping("/{cpf}")
-    public String deletePeopleByCpfId(@RequestBody PeopleEntity cpfPeople){
-        peopleService.deletePeople(cpfPeople);
+    public String deletePeopleByCpfId(@PathVariable String cpf) {
+        peopleService.deletePeopleByCpfId(cpf);
         return "Successfully deleted person";
     }
 
     @PutMapping("/{cpf}")
-    public ResponseEntity<String> alterPeople(@PathVariable String idCpf, @RequestBody PeopleEntity peopleEntity){
-        PeopleEntity newPeople = peopleService.alterPeople(idCpf, peopleEntity);
+    public ResponseEntity<String> alterPeople(@PathVariable String cpf, @RequestBody PeopleEntity peopleEntity){
+        PeopleEntity newPeople = peopleService.alterPeople(cpf, peopleEntity);
         if(newPeople != null){
             return new ResponseEntity<>("Atualização bem-sucedida", HttpStatus.OK);
         } else {
@@ -55,19 +55,29 @@ public class PeopleController {
         }
     }
 
-    @GetMapping("/{cpf}")
-    public ResponseEntity<?> findPeopleByCpfId(@PathVariable String cpfPeople){
-        Optional<PeopleEntity> people = peopleService.findPeopleByCpfId(cpfPeople);
-        if (people.isEmpty()) {
+    @GetMapping("/active")
+    public ResponseEntity<?> findAllActivePeople(){
+        List<PeopleEntity> people = peopleService.findAllActivePeople();
+        if (people == null || people.isEmpty()) {
             return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(people, HttpStatus.OK);
         }
     }
 
-    @GetMapping("name/{firstNamePeople}")
-    public ResponseEntity<?> findPeopleByFirstName(@PathVariable String firstNamePeople){
-        List<PeopleEntity> people = peopleService.findPeopleByFirstName(firstNamePeople);
+    @GetMapping("/{cpf}")
+    public ResponseEntity<?> findPeopleByCpfId(@PathVariable String cpf) {
+        Optional<PeopleEntity> people = peopleService.findPeopleByCpfId(cpf);
+        if (people.isEmpty()) {
+            return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(people.get(), HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/firstname/{firstName}")
+    public ResponseEntity<?> findPeopleByFirstName(@PathVariable String firstName) {
+        List<PeopleEntity> people = peopleService.findPeopleByFirstName(firstName);
 
         if (people == null || people.isEmpty()) {
             return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
@@ -76,7 +86,7 @@ public class PeopleController {
         }
     }
 
-    @GetMapping("name/{lastNamePeople}")
+    @GetMapping("/lastname/{lastNamePeople}")
     public ResponseEntity<?> findPeopleByLastName(@PathVariable String lastNamePeople){
         List<PeopleEntity> people = peopleService.findPeopleByLastName(lastNamePeople);
 

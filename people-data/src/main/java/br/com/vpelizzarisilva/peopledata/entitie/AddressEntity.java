@@ -46,6 +46,7 @@ public class AddressEntity {
     private PeopleEntity personAddress;
 
     public void setPostalCodeAddress(String postalCodeAddress) {
+        postalCodeAddress = postalCodeAddress.replaceAll("[^0-9]", "");
         if (CEPValidator.validarCEP(postalCodeAddress)) {
             this.postalCodeAddress = postalCodeAddress;
         } else {

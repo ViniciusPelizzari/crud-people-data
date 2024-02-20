@@ -13,4 +13,6 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity, String> {
 
     @Query("SELECT e FROM PeopleEntity e WHERE lower(e.lastNamePeople) LIKE lower(concat('%', :lastNamePeople, '%'))")
     List<PeopleEntity> findPeopleByLastName(String lastNamePeople);
+
+    List<PeopleEntity> findByStatusPeople(boolean status);
 }
