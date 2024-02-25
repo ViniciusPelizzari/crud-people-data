@@ -18,7 +18,7 @@ public class PeopleService {
     @Transactional
     public String createPeople (PeopleEntity peopleEntity){
         if (peopleRepository.existsByCpfPeople(peopleEntity.getCpfPeople())) {
-            return "CPF já cadastrado";
+            return "CPF already registered";
         } else{
             peopleRepository.save(peopleEntity);
         }

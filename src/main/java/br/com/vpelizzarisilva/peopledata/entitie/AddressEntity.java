@@ -46,7 +46,7 @@ public class AddressEntity {
         if (CEPValidator.validarCEP(postalCodeAddress)) {
             this.postalCodeAddress = postalCodeAddress;
         } else {
-            throw new IllegalArgumentException("CEP inválido");
+            throw new IllegalArgumentException("Invalid Postal Code!");
         }
     }
 }

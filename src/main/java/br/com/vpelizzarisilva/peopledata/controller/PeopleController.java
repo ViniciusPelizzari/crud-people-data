@@ -20,7 +20,7 @@ public class PeopleController {
     @PostMapping
     public ResponseEntity<String> createPeople(@RequestBody PeopleEntity peopleEntity) {
         String result = peopleService.createPeople(peopleEntity);
-        if (result.equals("CPF já cadastrado")) {
+        if (result.equals("CPF already registered")) {
             return ResponseEntity.badRequest().body(result);
         } else {
             return ResponseEntity.ok("Sucessfully created person");
@@ -43,9 +43,9 @@ public class PeopleController {
     public ResponseEntity<String> alterPeople(@PathVariable String cpf, @RequestBody PeopleEntity peopleEntity){
         PeopleEntity newPeople = peopleService.alterPeople(cpf, peopleEntity);
         if(newPeople != null){
-            return new ResponseEntity<>("Atualização bem-sucedida", HttpStatus.OK);
+            return new ResponseEntity<>("Successful update", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Erro na atualização", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Update error", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -53,7 +53,7 @@ public class PeopleController {
     public ResponseEntity<?> findAll(){
         List<PeopleEntity> people = peopleService.findAll();
         if (people == null || people.isEmpty()) {
-            return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No return. No items found!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(people, HttpStatus.OK);
         }
@@ -63,7 +63,7 @@ public class PeopleController {
     public ResponseEntity<?> findAllActivePeople(){
         List<PeopleEntity> people = peopleService.findAllActivePeople();
         if (people == null || people.isEmpty()) {
-            return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No return. No items found!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(people, HttpStatus.OK);
         }
@@ -73,7 +73,7 @@ public class PeopleController {
     public ResponseEntity<?> findPeopleByCpfId(@PathVariable String cpf) {
         Optional<PeopleEntity> people = peopleService.findPeopleByCpfId(cpf);
         if (people.isEmpty()) {
-            return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No return. No items found!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(people.get(), HttpStatus.OK);
         }
@@ -84,7 +84,7 @@ public class PeopleController {
         List<PeopleEntity> people = peopleService.findPeopleByFirstName(firstName);
 
         if (people == null || people.isEmpty()) {
-            return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No return. No items found!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(people, HttpStatus.OK);
         }
@@ -95,7 +95,7 @@ public class PeopleController {
         List<PeopleEntity> people = peopleService.findPeopleByLastName(lastNamePeople);
 
         if (people == null || people.isEmpty()) {
-            return new ResponseEntity<>("Sem retorno. Nenhum item encontrado!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No return. No items found!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(people, HttpStatus.OK);
         }

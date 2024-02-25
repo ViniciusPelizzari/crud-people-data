@@ -29,7 +29,7 @@ public class PeopleEntity {
 
     @NotBlank
     @Column(length = 50)
-    @Email(message = "Endereço de e-mail inválido")
+    @Email(message = "Invalid email address!")
     private String emailPeople;
 
     @Column(length = 150)
@@ -44,7 +44,7 @@ public class PeopleEntity {
         if (CPFValidator.validarCPF(cpf)) {
             this.cpfPeople = cpf;
         } else {
-            throw new IllegalArgumentException("CPF inválido");
+            throw new IllegalArgumentException("Invalid CPF");
         }
     }
 }
