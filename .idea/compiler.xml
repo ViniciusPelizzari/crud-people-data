@@ -10,6 +10,9 @@
         <module name="people-data" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="people-data" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
