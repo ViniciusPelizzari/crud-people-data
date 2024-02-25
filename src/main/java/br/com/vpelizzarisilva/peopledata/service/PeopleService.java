@@ -16,10 +16,14 @@ public class PeopleService {
     private PeopleRepository peopleRepository;
 
     @Transactional
-    public void createPeople (PeopleEntity peopleEntity){
-        peopleRepository.save(peopleEntity);
+    public String createPeople (PeopleEntity peopleEntity){
+        if (peopleRepository.existsByCpfPeople(peopleEntity.getCpfPeople())) {
+            return "CPF já cadastrado";
+        } else{
+            peopleRepository.save(peopleEntity);
+        }
+        return "";
     }
-
     @Transactional
     public void deletePeople (PeopleEntity peopleEntity){
         peopleRepository.delete(peopleEntity);

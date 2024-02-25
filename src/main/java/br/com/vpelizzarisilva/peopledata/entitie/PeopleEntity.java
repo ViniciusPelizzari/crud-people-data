@@ -14,12 +14,8 @@ public class PeopleEntity {
 
     @Id
     @NotBlank
-    @Column(length = 11)
+    @Column(length = 11, unique = true)
     private String cpfPeople;
-
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPeople;
 
     @NotNull
     private boolean  statusPeople;

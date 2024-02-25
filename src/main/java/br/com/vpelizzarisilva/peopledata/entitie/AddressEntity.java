@@ -41,10 +41,6 @@ public class AddressEntity {
     @Column(length = 10)
     private int numberAddress;
 
-    @OneToOne
-    //@JoinColumn(name = "idPeople")
-    private PeopleEntity personAddress;
-
     public void setPostalCodeAddress(String postalCodeAddress) {
         postalCodeAddress = postalCodeAddress.replaceAll("[^0-9]", "");
         if (CEPValidator.validarCEP(postalCodeAddress)) {

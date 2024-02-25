@@ -15,4 +15,6 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity, String> {
     List<PeopleEntity> findPeopleByLastName(String lastNamePeople);
 
     List<PeopleEntity> findByStatusPeople(boolean status);
+
+    boolean existsByCpfPeople(String cpfPeople);
 }

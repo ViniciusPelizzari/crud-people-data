@@ -18,9 +18,13 @@ public class PeopleController {
     private PeopleService peopleService;
 
     @PostMapping
-    public String createPeople(@RequestBody PeopleEntity peopleEntity){
-        peopleService.createPeople(peopleEntity);
-        return "Successfully created person";
+    public ResponseEntity<String> createPeople(@RequestBody PeopleEntity peopleEntity) {
+        String result = peopleService.createPeople(peopleEntity);
+        if (result.equals("CPF já cadastrado")) {
+            return ResponseEntity.badRequest().body(result);
+        } else {
+            return ResponseEntity.ok("Sucessfully created person");
+        }
     }
 
     @DeleteMapping
